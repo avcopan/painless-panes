@@ -8,7 +8,7 @@ const router = express.Router();
  */
 router.get("/", async (_, res) => {
     try {
-      frames = await query.getFrames();
+      frames = await query.getFrame();
       res.status(200).send(frames);
     } catch (error) {
       console.error(error);
