@@ -9,11 +9,22 @@ import { setCurrentWindowId } from "../store/reducers/window.reducer";
 export default function AddWindowImage() {
   const dispatch = useDispatch();
   // file upload states
+
+  // final blob file state
   const [imgSrc, setImgSrc] = useState(null);
+
+  // base64 encoded image to show preview of captured image
   const [preview, setPreview] = useState(null);
+
+  // state that controls whether the preview is displayed 
   const [verifyImage, setVerifyImage] = useState(0);
-  const [imageEditPreview, setImageEditPreview] = useState(null);
+
+  // const [imageEditPreview, setImageEditPreview] = useState(null);
+
+  // page loading state - need to attach spinner (if needed)
   const [loading, setLoading] = useState(true);
+
+  // store selections
   const project = useSelector((store) => store.project);
   const currentWindowId = useSelector((store) => store.currentWindowId);
   const windows = useSelector((store) => store.allWindows);
