@@ -14,13 +14,15 @@ import Button from "../components/Button";
 
 export default function FormPageAddImages() {
   const dispatch = useDispatch();
-  const currentWindowId = useSelector((store) => store.currentWindowId);
+
+  // image height, width, and desired frame states
   const [imageWidth, setImageWidth] = useState("");
   const [imageHeight, setImageHeight] = useState("");
   const [desiredFrame, setDesiredFrame] = useState(null);
-  const [dimensionsStatus, setDimensionsStatus] = useState(false);
-  const windows = useSelector((store) => store.allWindows);
 
+  // store selections
+  const windows = useSelector((store) => store.allWindows);
+  const currentWindowId = useSelector((store) => store.currentWindowId);
   const frameTypes = useSelector((store) => store.frames);
 
   useEffect(() => {
@@ -32,17 +34,20 @@ export default function FormPageAddImages() {
       return window.id == currentWindowId;
     });
 
-  if (currentWindow && currentWindow.image !== null) {
+    if (currentWindow && currentWindow.image !== null) {
       setImageHeight(currentWindow.height);
       setImageWidth(currentWindow.width);
       setDesiredFrame(currentWindow.desired_frame_id);
+    } else {
+      setImageHeight("");
+      setImageWidth("");
+      setDesiredFrame(null);
     }
   }, [currentWindowId, windows]);
 
   const saveDimensions = () => {
     const dimensionsToSend = { currentWindowId, imageWidth, imageHeight };
     dispatch(updateWindowDimensions(dimensionsToSend));
-    setDimensionsStatus(true);
   };
 
   const updateFrameType = () => {
@@ -59,15 +64,13 @@ export default function FormPageAddImages() {
         placeholder="Window Width"
         value={imageWidth}
         setValue={setImageWidth}
-        status={dimensionsStatus}
       />
       <FormPageInput
         placeholder="Window Height"
         value={imageHeight}
         setValue={setImageHeight}
-        status={dimensionsStatus}
       />
-      {imageWidth && imageHeight && !dimensionsStatus && (
+      {imageWidth && imageHeight && (
         <Button onClick={saveDimensions} text="Save Dimensions" />
       )}
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
@@ -92,10 +95,15 @@ export default function FormPageAddImages() {
             {/* --TODO-- Ensure that the user can only select one frame at a time */}
             {frameTypes.map((frameType) => (
               <li key={frameType.id}>
-                <input type="radio" name="radio-1" className="radio" checked={frameType.id==desiredFrame}
-                   onChange={(event) => {
+                <input
+                  type="radio"
+                  name="radio-1"
+                  className="radio"
+                  checked={frameType.id == desiredFrame}
+                  onChange={(event) => {
                     setDesiredFrame(frameType.id);
-                  }}/>
+                  }}
+                />
                 <label> {frameType.name}</label>
                 <img src={frameType.image} alt={frameType.name} />
               </li>
