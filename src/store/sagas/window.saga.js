@@ -33,7 +33,6 @@ export const updateWindowFrame = (payload) => {
 // action worker sagas
 export function* getAllWindowsSaga(action) {
   const project_id = action.payload.project_id;
-  console.log("Getting all windows for project:", project_id);
   try {
     const response = yield axios.get(`/api/window/${project_id}`);
     const windows = yield response.data;
@@ -52,19 +51,16 @@ export function* getAllWindowsSaga(action) {
 }
 
 export function* addWindowSaga(action) {
-  console.log('Payload:', action.payload);
   const project_id = action.payload.project_id;
   try {
-    console.log('Beginning of the try')
     const windowIdResponse = yield axios.post(
       `/api/window/${project_id}`,
       project_id
     );
     // id of the created window
-    const windowId = yield windowIdResponse.data;
+    const windowId = yield windowIdResponse.data.id;
+    console.log("WINDOW ID --> ", windowId);
     yield put(setCurrentWindowId(windowId));
-    console.log('End of the try')
-
   } catch (error) {
     console.error(error);
   }
