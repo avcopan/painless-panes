@@ -7,6 +7,7 @@ import FormPageInput from "../components/FormPageInput";
 import FormPageNavigationButtons from "../components/FormPageNavigationButtons";
 import AddWindowImage from "../components/AddImage";
 import {
+  addWindow,
   updateWindowDimensions,
   updateWindowFrame,
 } from "../store/sagas/window.saga";
@@ -25,6 +26,7 @@ export default function FormPageAddImages() {
   const windows = useSelector((store) => store.allWindows);
   const currentWindowId = useSelector((store) => store.currentWindowId);
   const frameTypes = useSelector((store) => store.frames);
+  const project = useSelector((store) => store.project);
 
   useEffect(() => {
     dispatch(actions.getFrames());
@@ -56,6 +58,13 @@ export default function FormPageAddImages() {
   const updateFrameType = () => {
     const frameToSend = { currentWindowId, frameType: desiredFrame };
     dispatch(updateWindowFrame(frameToSend));
+  };
+
+  const addNewWindow = () => {
+    dispatch(actions.addWindow({ project_id: project.id }));
+    dispatch(actions.getAllWindows({ project_id: project.id }));
+    setPreview(null);
+    setVerifyImage(null);
   };
 
   return (
@@ -116,6 +125,9 @@ export default function FormPageAddImages() {
           </ul>
         </div>
       </dialog>
+      {desiredFrame && (
+        <Button text="Add another window" onClick={addNewWindow} />
+      )}
       <FormPageButtonsContainer>
         <FormPageNavigationButtons page={4} />
       </FormPageButtonsContainer>

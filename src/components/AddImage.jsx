@@ -16,7 +16,7 @@ export default function AddWindowImage() {
   // base64 encoded image to show preview of captured image
   const [preview, setPreview] = useState(null);
 
-  // state that controls whether the preview is displayed 
+  // state that controls whether the preview is displayed
   const [verifyImage, setVerifyImage] = useState(0);
 
   // const [imageEditPreview, setImageEditPreview] = useState(null);
@@ -29,11 +29,11 @@ export default function AddWindowImage() {
   const currentWindowId = useSelector((store) => store.currentWindowId);
   const windows = useSelector((store) => store.allWindows);
 
-  const addNewWindow = () => {
-    dispatch(actions.addWindow({ project_id: project.id }));
-    setPreview(null);
-    setVerifyImage(null);
-  };
+  // const addNewWindow = () => {
+  //   dispatch(actions.addWindow({ project_id: project.id }));
+  //   setPreview(null);
+  //   setVerifyImage(null);
+  // };
 
   // handles sending the image capture to AWS in base64
   const sendPhotoToServer = (event) => {
@@ -100,9 +100,12 @@ export default function AddWindowImage() {
         `https://painless-panes.s3.amazonaws.com/${currentWindow.image}`
       );
       setVerifyImage(true);
+    } else {
+      setPreview(null);
+      setVerifyImage(null);
     }
     setLoading(false);
-  }, [currentWindowId, windows]);
+  }, [currentWindowId]);
 
   return (
     <>
@@ -141,7 +144,7 @@ export default function AddWindowImage() {
           {!preview && <Button onClick={capture} text="Capture Image" />}
         </>
       )}
-      <Button text="Add additional windows" onClick={addNewWindow}></Button>
+      {/* <Button text="Add additional windows" onClick={addNewWindow}></Button> */}
     </>
   );
 }
