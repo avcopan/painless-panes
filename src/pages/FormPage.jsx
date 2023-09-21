@@ -7,6 +7,7 @@ import FormPageZipView from "../page-views/FormPageZipView";
 import HowToMeasureWindows from "../page-views/HowToMeasureWindow";
 import FormPageAddImages from "../page-views/FormPageAddImagesView";
 import FormPageConfirmation from "../page-views/FormPageConfirmation";
+import SubmitPageView from "../page-views/SubmitPageView";
 
 
 export default function FormPage() {
@@ -37,6 +38,7 @@ export default function FormPage() {
       {page == 3 && <HowToMeasureWindows />}
       {page == 4 && <FormPageAddImages />}
       {page == 5 && <FormPageConfirmation />}
+      {page == 6 && <SubmitPageView />}
     </div>
   );
 }
