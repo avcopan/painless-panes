@@ -48,4 +48,4 @@ const sendConfirmationEmail = (email) => {
   });
 };
 
-module.exports = {sendEmailWithToken, sendConfirmationEmail };
+module.exports = { sendEmailWithToken, sendConfirmationEmail };

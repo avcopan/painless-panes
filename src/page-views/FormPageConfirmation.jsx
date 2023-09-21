@@ -23,6 +23,7 @@ export default function FormPageConfirmation() {
   const sendConfirmationEmail = () => {
     // Send the confirmation email;
     dispatch(actions.sendConfirmationEmail());
+    navigate("/form/6")
   };
   return (
     <>
