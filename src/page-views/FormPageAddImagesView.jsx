@@ -7,6 +7,7 @@ import FormPageInput from "../components/FormPageInput";
 import FormPageNavigationButtons from "../components/FormPageNavigationButtons";
 import AddWindowImage from "../components/AddImage";
 import {
+  addWindow,
   updateWindowDimensions,
   updateWindowFrame,
 } from "../store/sagas/window.saga";
@@ -14,14 +15,19 @@ import Button from "../components/Button";
 
 export default function FormPageAddImages() {
   const dispatch = useDispatch();
-  const currentWindowId = useSelector((store) => store.currentWindowId);
+
+  // image height, width, and desired frame states
   const [imageWidth, setImageWidth] = useState("");
   const [imageHeight, setImageHeight] = useState("");
   const [desiredFrame, setDesiredFrame] = useState(null);
   const [dimensionsStatus, setDimensionsStatus] = useState(false);
-  const windows = useSelector((store) => store.allWindows);
+  const [formFilled, setFormFilled] = useState(false);
 
+  // store selections
+  const windows = useSelector((store) => store.allWindows);
+  const currentWindowId = useSelector((store) => store.currentWindowId);
   const frameTypes = useSelector((store) => store.frames);
+  const project = useSelector((store) => store.project);
 
   useEffect(() => {
     dispatch(actions.getFrames());
@@ -32,10 +38,17 @@ export default function FormPageAddImages() {
       return window.id == currentWindowId;
     });
 
-  if (currentWindow && currentWindow.image !== null) {
+    if (currentWindow && currentWindow.image !== null) {
       setImageHeight(currentWindow.height);
       setImageWidth(currentWindow.width);
       setDesiredFrame(currentWindow.desired_frame_id);
+      setFormFilled(false);
+    } else {
+      setDimensionsStatus(false);
+      setImageHeight("");
+      setImageWidth("");
+      setDesiredFrame(null);
+      setFormFilled(false);
     }
   }, [currentWindowId, windows]);
 
@@ -48,6 +61,14 @@ export default function FormPageAddImages() {
   const updateFrameType = () => {
     const frameToSend = { currentWindowId, frameType: desiredFrame };
     dispatch(updateWindowFrame(frameToSend));
+    setFormFilled(true);
+  };
+
+  const addNewWindow = () => {
+    dispatch(actions.addWindow({ project_id: project.id }));
+    dispatch(actions.getAllWindows({ project_id: project.id }));
+    setPreview(null);
+    setVerifyImage(null);
   };
 
   return (
@@ -70,12 +91,15 @@ export default function FormPageAddImages() {
       {imageWidth && imageHeight && !dimensionsStatus && (
         <Button onClick={saveDimensions} text="Save Dimensions" />
       )}
-      {/* You can open the modal using document.getElementById('ID').showModal() method */}
-      <Button
-        className="btn"
-        onClick={() => document.getElementById("my_modal_3").showModal()}
-        text="Click to choose desired frame"
-      ></Button>
+      {/* Conditional rendering of the ability to choose frame, dependent
+      on the dimensions being set */}
+      {dimensionsStatus && (
+        <Button
+          className="btn"
+          onClick={() => document.getElementById("my_modal_3").showModal()}
+          text="Click to choose desired frame"
+        />
+      )}
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <form method="dialog">
@@ -92,10 +116,15 @@ export default function FormPageAddImages() {
             {/* --TODO-- Ensure that the user can only select one frame at a time */}
             {frameTypes.map((frameType) => (
               <li key={frameType.id}>
-                <input type="radio" name="radio-1" className="radio" checked={frameType.id==desiredFrame}
-                   onChange={(event) => {
+                <input
+                  type="radio"
+                  name="radio-1"
+                  className="radio"
+                  checked={frameType.id == desiredFrame}
+                  onChange={(event) => {
                     setDesiredFrame(frameType.id);
-                  }}/>
+                  }}
+                />
                 <label> {frameType.name}</label>
                 <img src={frameType.image} alt={frameType.name} />
               </li>
@@ -103,9 +132,26 @@ export default function FormPageAddImages() {
           </ul>
         </div>
       </dialog>
-      <FormPageButtonsContainer>
-        <FormPageNavigationButtons page={4} />
-      </FormPageButtonsContainer>
+      {/* Toast that renders after the formFilled state is true  */}
+      {formFilled && (
+        <div className="toast toast-center toast-middle">
+          <div onClick={addNewWindow} className="alert alert-success">
+            <span>Got it!</span>
+          </div>
+        </div>
+      )}
+      {/* Add window button renders when the form is filled */}
+      {formFilled && (
+        <Button text="Add another window" onClick={addNewWindow} />
+      )}
+      {/* Nav buttons render when the form is filled. Might need to
+      relook at how we handle buttons, or change the buttons for this
+      page prop-wise */}
+      {formFilled && (
+        <FormPageButtonsContainer>
+          <FormPageNavigationButtons page={4} />
+        </FormPageButtonsContainer>
+      )}
     </>
   );
 }

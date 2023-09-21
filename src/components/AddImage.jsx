@@ -9,21 +9,31 @@ import { setCurrentWindowId } from "../store/reducers/window.reducer";
 export default function AddWindowImage() {
   const dispatch = useDispatch();
   // file upload states
+
+  // final blob file state
   const [imgSrc, setImgSrc] = useState(null);
+
+  // base64 encoded image to show preview of captured image
   const [preview, setPreview] = useState(null);
+
+  // state that controls whether the preview is displayed
   const [verifyImage, setVerifyImage] = useState(0);
-  const [imageEditPreview, setImageEditPreview] = useState(null);
+
+  // const [imageEditPreview, setImageEditPreview] = useState(null);
+
+  // page loading state - need to attach spinner (if needed)
   const [loading, setLoading] = useState(true);
+
+  // store selections
   const project = useSelector((store) => store.project);
   const currentWindowId = useSelector((store) => store.currentWindowId);
   const windows = useSelector((store) => store.allWindows);
 
-
-  const addNewWindow = () => {
-      dispatch(actions.addWindow({project_id: project.id}));
-      setPreview(null);
-      setVerifyImage(null);
-  };
+  // const addNewWindow = () => {
+  //   dispatch(actions.addWindow({ project_id: project.id }));
+  //   setPreview(null);
+  //   setVerifyImage(null);
+  // };
 
   // handles sending the image capture to AWS in base64
   const sendPhotoToServer = (event) => {
@@ -77,10 +87,12 @@ export default function AddWindowImage() {
   }, [webcamRef, setImgSrc]);
 
   useEffect(() => {
-    console.log('THIS IS WINDOW ID',currentWindowId)
-    const currentWindow = windows.find((window) => {
-      return window.id == currentWindowId;
-    }, [currentWindowId]);
+    const currentWindow = windows.find(
+      (window) => {
+        return window.id == currentWindowId;
+      },
+      [currentWindowId]
+    );
 
     // setImageEditPreview(currentWindow.image);
     if (currentWindow && currentWindow.image !== null) {
@@ -88,9 +100,12 @@ export default function AddWindowImage() {
         `https://painless-panes.s3.amazonaws.com/${currentWindow.image}`
       );
       setVerifyImage(true);
+    } else {
+      setPreview(null);
+      setVerifyImage(null);
     }
     setLoading(false);
-  }, [currentWindowId, windows]);
+  }, [currentWindowId]);
 
   return (
     <>
@@ -129,8 +144,7 @@ export default function AddWindowImage() {
           {!preview && <Button onClick={capture} text="Capture Image" />}
         </>
       )}
-          <Button text="Add additional windows" onClick={addNewWindow}
-      ></Button>
+      {/* <Button text="Add additional windows" onClick={addNewWindow}></Button> */}
     </>
   );
 }
