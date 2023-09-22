@@ -67,8 +67,6 @@ export default function FormPageAddImages() {
   const addNewWindow = () => {
     dispatch(actions.addWindow({ project_id: project.id }));
     dispatch(actions.getAllWindows({ project_id: project.id }));
-    setPreview(null);
-    setVerifyImage(null);
   };
 
   return (
