@@ -53,12 +53,11 @@ VALUES
 CREATE TABLE "window" (
   "id" BIGSERIAL PRIMARY KEY,
   "image" TEXT, -- link to stored image in S3 || hash value of image
+  "annotated_image" TEXT, -- link to stored image in S3 || hash value of image
   "height" INT, -- for both height and width, we can discuss what the proper precision is/if decimals are needed
   "width" INT,
   "desired_frame_id" INT REFERENCES "frame",
-  "project_id" BIGINT REFERENCES "project" NOT NULL,
-  "submitted" BOOLEAN,
-  "submittal_date" date 
+  "project_id" BIGINT REFERENCES "project" NOT NULL
 );
 
 -- SELECT * FROM "window";
