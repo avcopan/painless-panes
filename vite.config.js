@@ -14,6 +14,12 @@ export default defineConfig({
         secure: false,
         ws: true,
       },
+      "/cv/api": {
+        target: process.env.CV_SERVER_URL,
+        changeOrigin: true,
+        secure: false,
+        ws: true,
+      },
     },
   },
 });

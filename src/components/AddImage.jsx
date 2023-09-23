@@ -4,7 +4,7 @@ import Button from "./Button";
 import { useState, useEffect } from "react";
 import actions from "../store/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentWindowId } from "../store/reducers/window.reducer";
+import { measureWindow } from "../cv/cv";
 
 export default function AddWindowImage() {
   const dispatch = useDispatch();
@@ -63,27 +63,20 @@ export default function AddWindowImage() {
   // inits the webcam
   const webcamRef = React.useRef(null);
 
-  // Function to convert a data URI to a Blob
-  function dataURItoBlob(dataURI) {
-    const byteString = atob(dataURI.split(",")[1]);
-    const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ab], { type: mimeString });
-  }
-
   // event handler for taking a picture and updating the imgSrc state to the
   // base64 value of the image
   const capture = React.useCallback(() => {
     setVerifyImage(true);
-    const imageSrc = webcamRef.current.getScreenshot();
-    setPreview(imageSrc);
-    const imageBlob = dataURItoBlob(imageSrc);
-    // sets the image source state to the base64 encoding of the image
-    setImgSrc(imageBlob);
+    const imageURI = webcamRef.current.getScreenshot();
+    setPreview(imageURI);
+
+    measureWindow(imageURI)
+      .then((result) => {
+        console.log("measureWindow return:", result);
+        setImgSrc(result.image);
+      })
+      .catch(console.error);
+
   }, [webcamRef, setImgSrc]);
 
   useEffect(() => {

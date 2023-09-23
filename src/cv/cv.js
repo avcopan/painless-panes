@@ -1,0 +1,40 @@
+import axios from "axios";
+
+/** Measure a window through a call to the CV API
+ *
+ * @param {*} imageURI A URI of the image
+ * @returns {Object} The original image and, if the measurement was successful, also the
+ *    annotated image, the width, and the height:
+ *      {
+ *        image: <Blob>,
+ *        annotated_image: <Blob>,  # if successful
+ *        width: <Number>,          # if successful
+ *        height: <Number>,         # if successful
+ *      }
+ */
+export async function measureWindow(imageURI) {
+  // Get the original image as a Blob
+  const imageBlob = await (await fetch(imageURI)).blob();
+
+  // Create form data for sending the image in a POST request
+  const formData = new FormData();
+  formData.append("image", imageBlob);
+
+  // No matter what, return the original image as a blob
+  const measurementData = { image: imageBlob };
+
+  try {
+    // Send the POST request and get the response
+    const response = await axios.post("/cv/api/window/measure", formData, {
+      responseType: "blob",
+    });
+
+    measurementData.annotated_image = await response.data;
+    measurementData.width = response.headers.width;
+    measurementData.height = response.headers.height;
+  } catch (error) {
+    console.error(error);
+  }
+
+  return measurementData;
+}
