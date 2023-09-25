@@ -21,6 +21,7 @@ PORT=8002   # the port used by the server
 DATABASE_URL=<URL to connect to database>
 CLIENT_URL=http://localhost:5173
 SERVER_URL=http://localhost:8002
+CV_SERVER_URL=https://painless-panes-cv-25b4b9560fd0.herokuapp.com
 SERVER_SESSION_SECRET=<your session secret>
 SENDGRID_API_KEY=<API key for sendgrid>
 SENDGRID_EMAIL=<sendgrid sender email address>
