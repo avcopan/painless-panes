@@ -12,7 +12,9 @@ const {
   requireAuthenticationMiddleware,
 } = require("../middlewares/auth.middleware.cjs");
 
-const { sendConfirmationEmail } = require("../modules/email.cjs")
+const { sendConfirmationEmail } = require("../modules/email.cjs");
+
+const { sendContactEmail } = require("../email.cjs");
 
 const router = express.Router();
 
@@ -30,6 +32,10 @@ router.post("/confirmation", requireAuthenticationMiddleware, (req, res) => {
   console.log(`Sent confirmation email to ${req.user.email}`);
   sendConfirmationEmail(req.user.email);
   res.sendStatus(202);
+});
+
+router.post("/contact", (req, res) => {
+  sendContactEmail(req, res);
 });
 
 /**
