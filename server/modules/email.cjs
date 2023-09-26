@@ -48,27 +48,16 @@ const sendConfirmationEmail = (email) => {
   });
 };
 
-const sendContactEmail = (req, res) => {
-  const { email, message } = req.body;
-
+const sendContactEmail = (email, message) => {
   const msg = {
     to: "painlesspanesdev@gmail.com",
-    from: email,
+    from: "painlesspanesdev@gmail.com",
     subject: "New Message from Contact Form",
     text: message,
-    html: `<p>${message}</p>`,
+    html: `<p>Email: ${email}</p><p>Message: ${message}</p>`,
   };
 
-  sendgrid
-    .send(msg)
-    .then(() => {
-      console.log("Email sent successfully");
-      res.status(200).send("Email sent successfully");
-    })
-    .catch((error) => {
-      console.error("An error occurred while sending the email", error);
-      res.status(500).send("An error occurred while sending the email");
-    });
+  return sendgrid.send(msg);
 };
 
 module.exports = {

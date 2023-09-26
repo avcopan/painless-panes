@@ -14,7 +14,7 @@ const {
 
 const { sendConfirmationEmail } = require("../modules/email.cjs");
 
-const { sendContactEmail } = require("../email.cjs");
+const { sendContactEmail } = require("../modules/email.cjs");
 
 const router = express.Router();
 
@@ -34,8 +34,19 @@ router.post("/confirmation", requireAuthenticationMiddleware, (req, res) => {
   res.sendStatus(202);
 });
 
-router.post("/contact", (req, res) => {
+router.post("/contact", async (req, res) => {
   sendContactEmail(req, res);
+  try {
+    const { email, message } = req.body;
+    console.log("Received contact request", { email, message });
+    const response = await sendContactEmail(email, message);
+
+    console.log("Email sent successfully", response);
+    res.status(200).send("Email sent successfully");
+  } catch (error) {
+    console.log("Failed to send email", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 /**
