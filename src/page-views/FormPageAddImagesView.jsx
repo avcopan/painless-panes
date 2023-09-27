@@ -1,7 +1,6 @@
 import React from "react";
 import Webcam from "react-webcam";
 import { measureWindow } from "../cv/cv";
-
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import actions from "../store/actions";
@@ -9,9 +8,7 @@ import FormPageButtonsContainer from "../components/FormPageButtonsContainer";
 import FormPageHeader from "../components/FormPageHeader";
 import FormPageInput from "../components/FormPageInput";
 import FormPageNavigationButtons from "../components/FormPageNavigationButtons";
-// import AddWindowImage from "../components/AddImage";
 import {
-  // addWindow,
   updateWindowDimensions,
   updateWindowFrame,
 } from "../store/sagas/window.saga";
