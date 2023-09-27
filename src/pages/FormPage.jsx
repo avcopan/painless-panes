@@ -8,7 +8,7 @@ import HowToMeasureWindows from "../page-views/HowToMeasureWindow";
 import FormPageAddImages from "../page-views/FormPageAddImagesView";
 import FormPageConfirmation from "../page-views/FormPageConfirmation";
 import SubmitPageView from "../page-views/SubmitPageView";
-import ContactPage from "../page-views/ContactPage";
+import ContactPage from "../pages/ContactPage";
 
 export default function FormPage() {
   const { page = 1 } = useParams();

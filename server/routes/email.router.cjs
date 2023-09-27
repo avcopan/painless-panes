@@ -35,7 +35,6 @@ router.post("/confirmation", requireAuthenticationMiddleware, (req, res) => {
 });
 
 router.post("/contact", async (req, res) => {
-  sendContactEmail(req, res);
   try {
     const { email, message } = req.body;
     console.log("Received contact request", { email, message });
