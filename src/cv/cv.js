@@ -7,9 +7,10 @@ import axios from "axios";
  *    annotated image, the width, and the height:
  *      {
  *        image: <Blob>,
- *        annotated_image: <Blob>,  # if successful
+ *        annotated_image: <Blob>,
  *        width: <Number>,          # if successful
  *        height: <Number>,         # if successful
+ *        error_message: <String>   # if unsuccessful
  *      }
  */
 export async function measureWindow(imageURI) {
@@ -32,6 +33,7 @@ export async function measureWindow(imageURI) {
     measurementData.annotated_image = await response.data;
     measurementData.width = response.headers.width;
     measurementData.height = response.headers.height;
+    measurementData.error_message = response.headers.error_message;
   } catch (error) {
     console.error(error);
   }

@@ -73,10 +73,15 @@ export default function AddWindowImage() {
     measureWindow(imageURI)
       .then((result) => {
         console.log("measureWindow return:", result);
-        setImgSrc(result.image);
+        console.log(
+          "Using annotated image?",
+          result.annotated_image ? "Yes" : "No"
+        );
+        setImgSrc(
+          result.annotated_image ? result.annotated_image : result.image
+        );
       })
       .catch(console.error);
-
   }, [webcamRef, setImgSrc]);
 
   useEffect(() => {
