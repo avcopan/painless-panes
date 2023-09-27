@@ -16,6 +16,8 @@ export default function ContactPage() {
 
       if (response.status === 200) {
         console.log("Email sent successfully");
+        setEmail("");
+        setMessage("");
       }
     } catch (error) {
       console.log("Error sending email:", error);
