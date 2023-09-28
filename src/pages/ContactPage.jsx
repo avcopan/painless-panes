@@ -29,7 +29,7 @@ export default function ContactPage() {
       <FormPageHeader text="We look forward to hearing about you, especially complaints, suggestions, and questionable jokes." />
       <div className="form-group">
         <textarea
-          className="textarea"
+          className="textarea textarea-bordered textarea-info "
           placeholder="Your Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -39,7 +39,7 @@ export default function ContactPage() {
       <div className="join">
         <input
           type="email"
-          className="input input-bordered join-item"
+          className="input input-bordered join-item input-info"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
