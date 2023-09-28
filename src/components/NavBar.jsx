@@ -1,19 +1,15 @@
-import { Link } from "react-router-dom";
-
 export default function NavBar() {
   return (
-    <div className="navbar bg-base-100">
-      <Link className="btn btn-ghost normal-case text-xl" to="/">
-        Get Windows
-      </Link>
-
-      <Link className="btn btn-ghost normal-case text-xl" to="/projects">
-        My Projects
-      </Link>
-
-      <Link className="btn btn-ghost normal-case text-xl" to="/contact">
-        Contact Us
-      </Link>
-    </div>
+    <ul className="menu menu-horizontal bg-base-200 w-full justify-center rounded-box">
+      <li className="btn-accent rounded-box mx-1">
+        <a href="/">Get Windows</a>
+      </li>
+      <li className="btn-accent rounded-box mx-1">
+        <a href="/projects">My Projects</a>
+      </li>
+      <li className="btn-accent rounded-box mx-1">
+        <a href="/contact">Contact Us</a>
+      </li>
+    </ul>
   );
 }
