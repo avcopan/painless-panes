@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 export default function NavBar() {
 
     return (
-        <div className="navbar bg-base-100">
-            <Link className="btn btn-ghost normal-case text-xl" to="/" >
+        <div className="navbar bg-primary text-primary-content justify-center">
+            <Link className="btn btn-ghost normal-case text-xl"to="/" >
                 Get Windows
             </Link>
 
