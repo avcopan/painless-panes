@@ -48,4 +48,20 @@ const sendConfirmationEmail = (email) => {
   });
 };
 
-module.exports = { sendEmailWithToken, sendConfirmationEmail };
+const sendContactEmail = (email, message) => {
+  const msg = {
+    to: "painlesspanesdev@gmail.com",
+    from: "painlesspanesdev@gmail.com",
+    subject: "New Message from Contact Form",
+    text: message,
+    html: `<p>Email: ${email}</p><p>Message: ${message}</p>`,
+  };
+
+  return sendgrid.send(msg);
+};
+
+module.exports = {
+  sendEmailWithToken,
+  sendConfirmationEmail,
+  sendContactEmail,
+};

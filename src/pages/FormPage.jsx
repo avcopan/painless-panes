@@ -9,7 +9,6 @@ import FormPageAddImages from "../page-views/FormPageAddImagesView";
 import FormPageConfirmation from "../page-views/FormPageConfirmation";
 import SubmitPageView from "../page-views/SubmitPageView";
 
-
 export default function FormPage() {
   const { page = 1 } = useParams();
   const dispatch = useDispatch();
@@ -27,9 +26,8 @@ export default function FormPage() {
   }, [project]);
 
   useEffect(() => {
-    dispatch(actions.getFrames())
-  },[])
-
+    dispatch(actions.getFrames());
+  }, []);
 
   return (
     <div className="w-full pl-12 pr-12 flex flex-col items-center justify-center">

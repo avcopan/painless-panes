@@ -4,6 +4,7 @@ import FormPage from "./pages/FormPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import PriorProjectsPage from "./pages/PriorProjectsPage";
 import NavBar from "./components/NavBar";
+import ContactPage from "./pages/ContactPage";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route exact path="/form/:page" element={<FormPage />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route exact path="/projects" element={<PriorProjectsPage />} />
+        <Route exact path="/contact" element={<ContactPage />} />
       </Routes>
     </Layout>
   );
