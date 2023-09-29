@@ -11,7 +11,6 @@ export default function FormPageConfirmation() {
   const windows = useSelector((store) => store.allWindows);
   const frameTypes = useSelector((store) => store.frames);
 
-
   const editWindow = (window) => {
     dispatch(setCurrentWindowId(Number(window.id)));
     navigate("/form/4");
@@ -23,7 +22,7 @@ export default function FormPageConfirmation() {
   const sendConfirmationEmail = () => {
     // Send the confirmation email;
     dispatch(actions.sendConfirmationEmail());
-    navigate("/form/6")
+    navigate("/form/6");
   };
   return (
     <>
@@ -61,7 +60,9 @@ export default function FormPageConfirmation() {
         ))}
         <div className="card-body">
           <div className="card-actions justify-center">
-            <button className="btn btn-primary" onClick={sendConfirmationEmail}>Submit</button>
+            <button className="btn btn-primary" onClick={sendConfirmationEmail}>
+              Submit
+            </button>
           </div>
         </div>
       </div>
