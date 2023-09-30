@@ -72,14 +72,22 @@ export function* addWindowSaga(action) {
 export function* addWindowPhotoSaga(action) {
   try {
     // folder/file of the bucket the image is stored in
-    const windowPathResponse = yield axios.post(
+    const response = yield axios.post(
       `/api/window/photoUpload/aws`,
       // payload is the formData object from AddImage
       action.payload
     );
+    const { originalImageKey, annotatedImageKey } = yield response.data;
+    const originalImageBody = {data: originalImageKey}
+    const annotatedImageBody = {data: annotatedImageKey}
+
     // handles the updating of the image
     const currentWindowId = yield select((store) => store.currentWindowId);
-    yield axios.put(`/api/window/${currentWindowId}/image`, windowPathResponse);
+    yield axios.put(`/api/window/${currentWindowId}/image`, originalImageBody);
+    yield axios.put(
+      `/api/window/${currentWindowId}/annotated_image`,
+      annotatedImageBody
+    );
   } catch (error) {
     console.error(error);
   }

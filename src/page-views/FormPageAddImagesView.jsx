@@ -30,6 +30,10 @@ export default function FormPageAddImages() {
   // final blob file state
   const [imgSrc, setImgSrc] = useState(null);
 
+  // final blob file state with image annotation
+
+  const [annotatedImgSrc, setAnnotatedImgSrc] = useState(null);
+
   // base64 encoded image to show preview of captured image
   const [preview, setPreview] = useState(null);
 
@@ -56,12 +60,12 @@ export default function FormPageAddImages() {
       return window.id == currentWindowId;
     });
 
-    if (currentWindow && currentWindow.image !== null) {
+    if (currentWindow && currentWindow.annotated_image !== null) {
       setImageHeight(currentWindow.height);
       setImageWidth(currentWindow.width);
       setDesiredFrame(currentWindow.desired_frame_id);
       setPreview(
-        `https://painless-panes.s3.amazonaws.com/${currentWindow.image}`
+        `https://painless-panes.s3.amazonaws.com/${currentWindow.annotated_image}`
       );
       setVerifyImage(true);
       setFormFilled(true);
@@ -112,6 +116,7 @@ export default function FormPageAddImages() {
     // dispatches a POST request to upload the photo to S3
     const formData = new FormData();
     formData.append("image", imgSrc);
+    formData.append("annotated_image", annotatedImgSrc);
     formData.append("project_id", project.id);
     formData.append("current_window_id", currentWindowId);
     dispatch(actions.addWindowPhoto(formData));
@@ -140,9 +145,16 @@ export default function FormPageAddImages() {
           "Using annotated image?",
           result.annotated_image ? "Yes" : "No"
         );
-        setImgSrc(
-          result.annotated_image ? result.annotated_image : result.image
-        );
+        setImgSrc(result.image);
+        setAnnotatedImgSrc(result.annotated_image);
+        const myImage = URL.createObjectURL(result.annotated_image);
+        console.log("WHAT IS THE URL", myImage);
+        setPreview(myImage);
+        //If AR tag is printed will autofill measurements
+        if (result.width && result.height) {
+          setImageWidth(result.width);
+          setImageHeight(result.height);
+        }
       })
       .catch(console.error);
   }, [webcamRef, setImgSrc]);
@@ -169,7 +181,7 @@ export default function FormPageAddImages() {
           <>
             <p>Preview:</p>
             <img src={preview} />
-            {verifyImage && imgSrc && (
+            {verifyImage && imgSrc && annotatedImgSrc && (
               <Button onClick={sendPhotoToServer} text="Save" />
             )}
             {verifyImage && (

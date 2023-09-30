@@ -37,7 +37,7 @@ export default function FormPageConfirmation() {
           >
             <figure>
               <img
-                src={`https://painless-panes.s3.amazonaws.com/${window.image}`}
+                src={`https://painless-panes.s3.amazonaws.com/${window.annotated_image}`}
                 alt="window!"
               />
             </figure>
