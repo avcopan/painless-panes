@@ -124,10 +124,14 @@ export default function FormPageAddImages() {
     // dispatch(setCurrentWindowId(null));
   };
 
+  const videoWidth = 640;
+  const videoHeight = 640;
+  const videoRearFacing = true;
+
   const videoConstraints = {
-    width: 1280,
-    height: 720,
-    facingMode: "user",
+    width: videoWidth,
+    height: videoHeight,
+    facingMode: videoRearFacing ? "environment" : "user",
   };
 
   // inits the webcam
@@ -170,11 +174,12 @@ export default function FormPageAddImages() {
         {!preview && (
           <Webcam
             audio={false}
-            height={720}
+            width={videoWidth}
+            height={videoHeight}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            width={1280}
             videoConstraints={videoConstraints}
+            forceScreenshotSourceSize={true}
           />
         )}
         {preview && (

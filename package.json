@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "server": "nodemon --watch server server/server.cjs",
-    "client": "vite",
+    "client": "vite --host",
     "build": "vite build",
     "postinstall": "npm run build"
   },
@@ -34,6 +34,7 @@
     "vite": "^4.4.9"
   },
   "devDependencies": {
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
     "autoprefixer": "^10.4.15",
     "daisyui": "^3.6.5",
     "postcss": "^8.4.29",

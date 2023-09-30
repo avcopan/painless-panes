@@ -14,13 +14,30 @@ You will need to enter your API key and the email you authenticated with SendGri
 
 ### Set Environment Variables
 
-The following environment variables must be set in a `.env` file:
+Before setting your environment variables, run `npm run client` to figure out your
+network IP address.
+You should see something like this:
+```
+> vite --host
+
+  VITE v4.4.9  ready in 672 ms
+
+  ➜  Local:   https://localhost:5173/
+  ➜  Network: https://10.0.1.200:5173/
+```
+The `Network` address at the bottom shows your network IP address and will be used as
+the `CLIENT_URL` below.
+
+The server URL will be accessible via HTTP at the same address on port 8002, so you will
+set the `SERVER_URL` environment variable accordingly.
+
+The following environment variables must be set in a `.env` file.
 
 ```
 PORT=8002   # the port used by the server
 DATABASE_URL=<URL to connect to database>
-CLIENT_URL=http://localhost:5173
-SERVER_URL=http://localhost:8002
+CLIENT_URL=https://10.0.1.200:5173
+SERVER_URL=http://10.0.1.200:8002
 CV_SERVER_URL=https://painless-panes-cv-25b4b9560fd0.herokuapp.com
 SERVER_SESSION_SECRET=<your session secret>
 SENDGRID_API_KEY=<API key for sendgrid>
