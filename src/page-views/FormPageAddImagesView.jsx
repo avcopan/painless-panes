@@ -208,7 +208,7 @@ export default function FormPageAddImages() {
           </>
         )}
       </div>
-      <div className="pt-4">
+      <div className="pt-4 mb-4">
         <FormPageHeader text="Enter the dimensions, if they weren't automatically measured." />
         <div className="flex flex-row join">
           <FormPageInput
@@ -225,10 +225,11 @@ export default function FormPageAddImages() {
             status={dimensionsStatus}
             className="w-1/3 join-item"
           />
-          {imageWidth && imageHeight && !dimensionsStatus && (
+          {imageWidth && imageHeight && (
             <Button
               onClick={saveDimensions}
               text="Save"
+              disabled={dimensionsStatus}
               className="btn-primary w-1/3 join-item"
             />
           )}
@@ -237,12 +238,11 @@ export default function FormPageAddImages() {
       {/* Conditional rendering of the ability to choose frame, dependent
       on the dimensions being set */}
       {(dimensionsStatus || formFilled) && (
-        <button
-          className="btn normal-case btn-lg"
+        <Button
+          text="Click here to select the frame type you want."
           onClick={() => document.getElementById("my_modal_3").showModal()}
-        >
-          <FormPageHeader text="Click here to select the frame type you want." />
-        </button>
+          className="mb-4 btn normal-case btn-lg font-medium"
+        />
       )}
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
@@ -285,17 +285,19 @@ export default function FormPageAddImages() {
         </div>
       )}
       {/* Add window button renders when the form is filled */}
-      {formFilled && (
-        <Button text="Add another window" onClick={addNewWindow} />
-      )}
       {/* Nav buttons render when the form is filled. Might need to
       relook at how we handle buttons, or change the buttons for this
       page prop-wise */}
-      {formFilled && (
-        <FormPageButtonsContainer>
-          <FormPageNavigationButtons page={4} />
-        </FormPageButtonsContainer>
-      )}
+      <FormPageButtonsContainer>
+        <FormPageNavigationButtons
+          page={4}
+          nextButtonText="Done"
+          showNextButton={formFilled}
+          centerContent={
+            formFilled && <Button text="Add Window" onClick={addNewWindow} />
+          }
+        />
+      </FormPageButtonsContainer>
     </>
   );
 }

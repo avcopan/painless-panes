@@ -12,7 +12,7 @@ export default function HowToMeasureWindows() {
       </p>
       <br />
       <iframe
-        className="w-screen aspect-video"
+        className="w-full aspect-video"
         src="https://www.youtube.com/embed/y4DLls4kr84"
       ></iframe>
       <FormPageButtonsContainer>
