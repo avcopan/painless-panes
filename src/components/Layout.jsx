@@ -2,7 +2,7 @@ import logoSvg from "/painless-panes-logo.svg";
 
 function Header() {
   return (
-    <nav className="navbar bg-base-100 mb-8 gap-4 items-center">
+    <nav className="navbar bg-base-100 mb-4 gap-4 items-center">
       <img src={logoSvg} alt="Logo" className="h-20" />
       <h1>Painless Panes</h1>
     </nav>

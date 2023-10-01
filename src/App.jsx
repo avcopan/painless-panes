@@ -5,11 +5,9 @@ import NotFoundPage from "./pages/NotFoundPage";
 import PriorProjectsPage from "./pages/PriorProjectsPage";
 import NavBar from "./components/NavBar";
 import ContactPage from "./pages/ContactPage";
-import Stepper from "./components/Stepper";
 
 export default function App() {
   const location = useLocation();
-  const stepperPage = location.pathname.split("/")[2];
 
   return (
     <Layout>
@@ -21,7 +19,6 @@ export default function App() {
         <Route exact path="/projects" element={<PriorProjectsPage />} />
         <Route exact path="/contact" element={<ContactPage />} />
       </Routes>
-      <Stepper page={stepperPage} />
     </Layout>
   );
 }

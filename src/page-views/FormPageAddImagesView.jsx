@@ -165,30 +165,29 @@ export default function FormPageAddImages() {
 
   return (
     <>
-      <FormPageHeader text="Take a photo of the window you desire to have replaced" />
-
-      {/* {loading ? (
-        <div>loading</div>
-      ) : ( */}
-      <>
+      <FormPageHeader text="Take a photo of a window to be replaced." />
+      <div className="relative">
         {!preview && (
-          <Webcam
-            audio={false}
-            width={videoWidth}
-            height={videoHeight}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            videoConstraints={videoConstraints}
-            forceScreenshotSourceSize={true}
-          />
+          <>
+            <Webcam
+              audio={false}
+              width={videoWidth}
+              height={videoHeight}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              videoConstraints={videoConstraints}
+              forceScreenshotSourceSize={true}
+            />
+            <Button
+              onClick={capture}
+              text="Take Picture"
+              className="btn-sm btn-primary absolute bottom-2 left-4"
+            />
+          </>
         )}
         {preview && (
           <>
-            <p>Preview:</p>
             <img src={preview} />
-            {verifyImage && imgSrc && annotatedImgSrc && (
-              <Button onClick={sendPhotoToServer} text="Save" />
-            )}
             {verifyImage && (
               <Button
                 onClick={() => {
@@ -196,30 +195,45 @@ export default function FormPageAddImages() {
                   setVerifyImage(null);
                 }}
                 text="Retake"
+                className="btn-sm btn-primary absolute bottom-2 left-4"
+              />
+            )}
+            {verifyImage && imgSrc && annotatedImgSrc && (
+              <Button
+                onClick={sendPhotoToServer}
+                text="Save"
+                className="btn-sm btn-primary absolute bottom-2 right-4"
               />
             )}
           </>
         )}
-        {!preview && <Button onClick={capture} text="Capture Image" />}
-      </>
-      {/* )} */}
-      {/* <Button text="Add additional windows" onClick={addNewWindow}></Button> */}
-
-      <FormPageInput
-        placeholder="Window Width"
-        value={imageWidth}
-        setValue={setImageWidth}
-        status={dimensionsStatus}
-      />
-      <FormPageInput
-        placeholder="Window Height"
-        value={imageHeight}
-        setValue={setImageHeight}
-        status={dimensionsStatus}
-      />
-      {imageWidth && imageHeight && !dimensionsStatus && (
-        <Button onClick={saveDimensions} text="Save Dimensions" />
-      )}
+      </div>
+      <div className="pt-4">
+        <FormPageHeader text="Enter the dimensions, if they weren't automatically measured." />
+        <div className="flex flex-row join">
+          <FormPageInput
+            placeholder="Width"
+            value={imageWidth}
+            setValue={setImageWidth}
+            status={dimensionsStatus}
+            className="w-1/3 join-item"
+          />
+          <FormPageInput
+            placeholder="Height"
+            value={imageHeight}
+            setValue={setImageHeight}
+            status={dimensionsStatus}
+            className="w-1/3 join-item"
+          />
+          {imageWidth && imageHeight && !dimensionsStatus && (
+            <Button
+              onClick={saveDimensions}
+              text="Save"
+              className="btn-primary w-1/3 join-item"
+            />
+          )}
+        </div>
+      </div>
       {/* Conditional rendering of the ability to choose frame, dependent
       on the dimensions being set */}
       {(dimensionsStatus || formFilled) && (
