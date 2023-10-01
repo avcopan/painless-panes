@@ -237,11 +237,12 @@ export default function FormPageAddImages() {
       {/* Conditional rendering of the ability to choose frame, dependent
       on the dimensions being set */}
       {(dimensionsStatus || formFilled) && (
-        <Button
-          className="btn"
+        <button
+          className="btn normal-case btn-lg"
           onClick={() => document.getElementById("my_modal_3").showModal()}
-          text="Click to choose desired frame"
-        />
+        >
+          <FormPageHeader text="Click here to select the frame type you want." />
+        </button>
       )}
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
