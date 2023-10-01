@@ -42,9 +42,9 @@ function FormPageUnverifiedEmailView() {
 
   return (
     <>
-      <FormPageHeader text="Email?" />
+      <FormPageHeader text="Please enter your email:" />
       <FormPageInput
-        placeholder="Enter your email here..."
+        placeholder="Enter email here"
         value={email}
         setValue={setEmail}
       />
@@ -61,7 +61,7 @@ function FormPageUnverifiedEmailView() {
               </button>
             </form>
             <p className="py-4">
-              Click the link we sent to {email} to verify your email address.
+              Click the link we sent to {email} to verify your email address!
             </p>
             <FormPageButtonsContainer>
               <FormPageNavigationButtons page={1} />
