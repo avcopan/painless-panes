@@ -32,7 +32,7 @@ export default function FormPage() {
 
   return (
     <>
-      <div className="w-full mb-auto pl-12 pr-12 flex flex-col items-center justify-center">
+      <div className="grow w-full mb-auto pl-12 pr-12 flex flex-col items-center justify-center">
         {page == 1 && <FormPageEmailView />}
         {page == 2 && <FormPageZipView />}
         {page == 3 && <HowToMeasureWindows />}

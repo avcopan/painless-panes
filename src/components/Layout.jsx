@@ -10,11 +10,11 @@ function Header() {
 }
 export default function Layout({ children }) {
   return (
-    <div className="max-w-screen-sm">
+    <div className="flex flex-col h-screen max-w-screen-sm">
       <header>
         <Header />
       </header>
-      <main className="flex flex-col justify-center items-center gap-6">
+      <main className="flex flex-grow flex-col justify-center items-center gap-6">
         {children}
       </main>
     </div>
