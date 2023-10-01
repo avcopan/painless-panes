@@ -12,7 +12,7 @@ export default function Stepper({ page }) {
       </li>
       <li className={pageNum >= 5 ? "step step-primary" : "step"}>Review</li>
       <li className={pageNum >= 6 ? "step step-primary" : "step"}>
-        Confirmation
+        Confirm
       </li>
     </ul>
   );

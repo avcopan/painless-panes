@@ -8,6 +8,7 @@ import HowToMeasureWindows from "../page-views/HowToMeasureWindow";
 import FormPageAddImages from "../page-views/FormPageAddImagesView";
 import FormPageConfirmation from "../page-views/FormPageConfirmation";
 import SubmitPageView from "../page-views/SubmitPageView";
+import Stepper from "../components/Stepper";
 
 export default function FormPage() {
   const { page = 1 } = useParams();
@@ -30,13 +31,16 @@ export default function FormPage() {
   }, []);
 
   return (
-    <div className="w-full pl-12 pr-12 flex flex-col items-center justify-center">
-      {page == 1 && <FormPageEmailView />}
-      {page == 2 && <FormPageZipView />}
-      {page == 3 && <HowToMeasureWindows />}
-      {page == 4 && <FormPageAddImages />}
-      {page == 5 && <FormPageConfirmation />}
-      {page == 6 && <SubmitPageView />}
-    </div>
+    <>
+      <div className="grow w-full mb-auto pl-12 pr-12 flex flex-col items-center justify-center">
+        {page == 1 && <FormPageEmailView />}
+        {page == 2 && <FormPageZipView />}
+        {page == 3 && <HowToMeasureWindows />}
+        {page == 4 && <FormPageAddImages />}
+        {page == 5 && <FormPageConfirmation />}
+        {page == 6 && <SubmitPageView />}
+      </div>
+      <Stepper page={page} />
+    </>
   );
 }

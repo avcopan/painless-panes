@@ -6,10 +6,13 @@ export default function HowToMeasureWindows() {
   const VIDEO_ID = "y4DLls4kr84";
   return (
     <>
-      <FormPageHeader text="How do we measure a window?" />
+      <p>
+        We will try to measure your window from the photo on the next page, but
+        here's how to measure it yourself.
+      </p>
+      <br />
       <iframe
-        width="420"
-        height="315"
+        className="w-full aspect-video"
         src="https://www.youtube.com/embed/y4DLls4kr84"
       ></iframe>
       <FormPageButtonsContainer>

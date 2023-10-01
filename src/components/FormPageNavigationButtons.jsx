@@ -4,6 +4,9 @@ import Button from "./Button";
 export default function FormPageNavigationButtons({
   page,
   onClickNext = undefined,
+  showNextButton = true,
+  nextButtonText = "Next",
+  centerContent = null,
 }) {
   const navigate = useNavigate();
 
@@ -21,7 +24,12 @@ export default function FormPageNavigationButtons({
   return (
     <>
       <div>{page > 1 && <Button text="Back" onClick={navigateBack} />}</div>
-      <Button text="Next" onClick={navigateNext} />
+      {centerContent}
+      <div>
+        {showNextButton && (
+          <Button text={nextButtonText} onClick={navigateNext} />
+        )}
+      </div>
     </>
   );
 }

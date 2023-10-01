@@ -6,9 +6,8 @@ export default function SubmitPageView() {
     <>
       <FormPageHeader text="Thank you for choosing our services!" />
       <p className="mb-5">
-        We have successfully received your request. A confirmation email has
-        been sent, and our team is diligently working on measuring your windows
-        and preparing an upfront pricing estimate tailored to your needs.
+        We have received your request and sent you a confirmation email.
+        Our team is diligently working on preparing a pricing estimate for you.
       </p>
       <p>
         You can expect an email within the next 72 hours with a qualifying
