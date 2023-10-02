@@ -4,9 +4,9 @@ export default function NavBar() {
       <li className="btn-accent rounded-box mx-1">
         <a href="/">Get Windows</a>
       </li>
-      <li className="btn-accent rounded-box mx-1">
+      {/* <li className="btn-accent rounded-box mx-1">
         <a href="/projects">My Projects</a>
-      </li>
+      </li> */}
       <li className="btn-accent rounded-box mx-1">
         <a href="/contact">Contact Us</a>
       </li>
