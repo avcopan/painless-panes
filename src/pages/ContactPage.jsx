@@ -26,26 +26,26 @@ export default function ContactPage() {
 
   return (
     <>
-      <FormPageHeader text="We look forward to hearing about you, especially complaints, suggestions, and questionable jokes." />
-      <div className="form-group">
-        <textarea
-          className="textarea textarea-bordered textarea-info "
-          placeholder="Your Message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
+      <div className="pl-8 pr-8">
+        <FormPageHeader text="We want to hear from you!" />
+        <p>
+          Reach out to us below, or email us directly at
+          painlesspanesdev@gmail.com.
+        </p>
       </div>
-
-      <div className="join">
-        <input
-          type="email"
-          className="input input-bordered join-item input-info"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-
+      <textarea
+        className="textarea textarea-bordered textarea-info "
+        placeholder="Your Message"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+      <input
+        type="email"
+        className="input input-bordered input-info"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <button onClick={sendEmail} className="btn btn-primary">
         Send
       </button>
