@@ -10,7 +10,7 @@ function Header() {
 }
 export default function Layout({ children }) {
   return (
-    <div className="flex flex-col h-screen max-w-screen-sm">
+    <div className="flex flex-col h-[calc(100dvh)] max-w-screen-sm">
       <header>
         <Header />
       </header>
