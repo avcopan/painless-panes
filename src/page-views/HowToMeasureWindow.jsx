@@ -7,10 +7,17 @@ export default function HowToMeasureWindows() {
   return (
     <>
       <p>
-        We will try to measure your window from the photo on the next page, but
-        here's how to measure it yourself.
+        <a
+          href="/printable-scale-tag.pdf"
+          download
+          className="link link-secondary"
+        >
+          Click here
+        </a>{" "}
+        to download and print a scale tag for photo measurement.
       </p>
       <br />
+      <p>Alternatively, here's how to measure the windows yourself:</p>
       <iframe
         className="w-full aspect-video"
         src="https://www.youtube.com/embed/y4DLls4kr84"
