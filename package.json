@@ -5,7 +5,7 @@
     "server": "nodemon --watch server server/server.cjs",
     "client": "vite --host",
     "build": "vite build",
-    "postinstall": "npm run build"
+    "start": "node server/server.cjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.410.0",
