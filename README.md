@@ -1,1 +1,1 @@
-# painless-panes
+# Painless Panes

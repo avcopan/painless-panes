@@ -44,7 +44,7 @@ export default function FormPageConfirmation() {
             <div className="card-body items-center text-center">
               <p>Height: {window.height}</p>
               <p>Width: {window.width}</p>
-              {/* <p>Desired frame: {getFrameType(window.desired_frame_id).name}</p> */}
+              <p>Desired frame: {getFrameType(window.desired_frame_id).name}</p>
             </div>
             <div className="card-actions justify-end">
               <button

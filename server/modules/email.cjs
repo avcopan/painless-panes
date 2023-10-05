@@ -39,7 +39,7 @@ const sendConfirmationEmail = (email) => {
   return sendgrid.send({
     to: email,
     from: process.env.SENDGRID_EMAIL,
-    subject: "Submission Confimation",
+    subject: "Submission Confirmation",
     text: `Hello! Thank you for submitting your information. We have received your submission and it is being processed. You can expect an email within the next 72 hours with a qualifying estimate.`,
     html: `
       <h3>Hello!</h3>
