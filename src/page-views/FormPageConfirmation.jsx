@@ -16,8 +16,9 @@ export default function FormPageConfirmation() {
     navigate("/form/4");
   };
 
-  const getFrameType = (frameId) => {
-    return frameTypes.find((frame) => frame.id == frameId);
+  const getFrameTypeName = (frameId) => {
+    const frameType = frameTypes.find((frame) => frame.id == frameId);
+    return frameType ? frameType.name : "None selected";
   };
   const sendConfirmationEmail = () => {
     // Send the confirmation email;
@@ -44,7 +45,7 @@ export default function FormPageConfirmation() {
             <div className="card-body items-center text-center">
               <p>Height: {window.height}</p>
               <p>Width: {window.width}</p>
-              <p>Desired frame: {getFrameType(window.desired_frame_id).name}</p>
+              <p>Desired frame: {getFrameTypeName(window.desired_frame_id)}</p>
             </div>
             <div className="card-actions justify-end">
               <button
