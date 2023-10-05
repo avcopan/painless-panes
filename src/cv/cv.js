@@ -1,5 +1,9 @@
 import axios from "axios";
 
+// The address of the deployed Painless Panes CV server
+const CV_SERVER_ADDRESS =
+  "https://painless-panes-cv-25b4b9560fd0.herokuapp.com";
+
 /** Measure a window through a call to the CV API
  *
  * @param {*} imageURI A URI of the image
@@ -26,9 +30,13 @@ export async function measureWindow(imageURI) {
 
   try {
     // Send the POST request and get the response
-    const response = await axios.post("/cv/api/window/measure", formData, {
-      responseType: "blob",
-    });
+    const response = await axios.post(
+      `${CV_SERVER_ADDRESS}/cv/api/window/measure`,
+      formData,
+      {
+        responseType: "blob",
+      }
+    );
 
     measurementData.annotated_image = await response.data;
     measurementData.width = response.headers.width;

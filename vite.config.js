@@ -13,15 +13,6 @@ const proxyServers = {
   },
 };
 
-if (process.env.CV_SERVER_URL) {
-  proxyServers["/cv/api"] = {
-    target: process.env.CV_SERVER_URL,
-    changeOrigin: true,
-    secure: false,
-    ws: true,
-  };
-}
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [basicSsl(), react()],
