@@ -61,7 +61,10 @@ function FormPageUnverifiedEmailView() {
               </button>
             </form>
             <p className="py-4">
-              Click the link we sent to {email} to verify your email address!
+              Click the link we sent to {email} to verify your email address.
+            </p>
+            <p>
+              If you are on a PC, open the link on your phone for best results.
             </p>
           </div>
         </dialog>
