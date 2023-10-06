@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 // can be removed after image taking is finalized
 const fileUpload = require("express-fileupload");
@@ -39,8 +40,9 @@ app.use("/api/project", projectRouter);
 app.use(express.static("dist"));
 
 // Handle client routing, return all requests to the app
-app.get('*', (_req, res) => {
-  res.sendFile('index.html');
+app.get("*", (_req, res) => {
+  const indexHtmlPath = path.join(__dirname, "../dist/index.html");
+  res.sendFile(indexHtmlPath);
 });
 
 /** Listen * */
