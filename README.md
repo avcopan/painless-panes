@@ -57,7 +57,7 @@ instructional video specific to the app, though, explaining to the prospective u
 it works.
 
 
-## Running the App Locally
+## Running Locally
 
 ### Software Needed
 
@@ -118,9 +118,9 @@ heroku login
 heroku create painless-panes
 ```
 
-### Heroku Environment Variables
+### Heroku Configuration
 
-You will need to set
+You will need to set the following environment variables.
 ```
 heroku config:set CLIENT_URL=<heroku app URL, no trailing slash>
 heroku config:set SERVER_URL=<heroku app URL, no trailing slash>
