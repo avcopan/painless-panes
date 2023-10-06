@@ -57,7 +57,7 @@ instructional video specific to the app, though, explaining to the prospective u
 it works.
 
 
-## Running the App Locally
+## Running Locally
 
 ### Software Needed
 
@@ -96,7 +96,7 @@ DATABASE_PASSWORD=<postgres password, if your local installation requires authen
 
 Additionally, you will need to change the `CV_SERVER_ADDRESS` variable in `src/cv/cv.js` (line 4) to the address of your deployed Painless Panes CV API.
 
-## Deploying the App
+## Deployment
 
 ### Accounts Needed for Deployment
 
